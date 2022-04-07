@@ -3,31 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
 </head>
 <body>
-<h1>Liste des patients</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nom</th>
-                <th>Date</th>
-                <th>Malade</th>
-                <th>Score</th>
-            </tr>
-        </thead>
-        <tbody>
-        <tr th:each="p:${listPatient}">
-        <td th:text="${p.id}"></td>
-        <td th:text="${p.nom}"></td>
-        <td th:text="${p.DateN}"></td>
-        <td th:text="${p.malade}"></td>
-        <td th:text="${p.score}"></td>
+<div class="container mt-2">
+    <div class="card">
+        <div class="card-header"> Liste des Patients</div>
+        <div class="card-body">
+            <h1>Liste des patients</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Date</th>
+                    <th>Malade</th>
+                    <th>Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p:${listPatient}">
+                    <td th:text="${p.id}"></td>
+                    <td th:text="${p.nom}"></td>
+                    <td th:text="${p.DateN}"></td>
+                    <td th:text="${p.malade}"></td>
+                    <td th:text="${p.score}"></td>
 
-        </tr>
-        </tbody>
+                </tr>
+                </tbody>
 
 
-    </table>
+            </table>
+
+
+        </div>
+    </div>
+
+</div>
+
 </body>
 </html>
