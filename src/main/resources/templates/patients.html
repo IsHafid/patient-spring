@@ -34,8 +34,10 @@
 
 
             </table>
-
-
+            <ul class="nav nav-pills">
+            <li th:each="page,status:${pages}"> </li>
+            <a class="btn btn-outline-dark" th:text="${status.index}"></a>
+            </ul>
         </div>
     </div>
 
