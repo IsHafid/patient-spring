@@ -25,6 +25,12 @@ public class PatientApplication {
 				patientrepo.save(new Patient(null,"Hatim",new Date(),true,15));
 				patientrepo.save(new Patient(null,"Hafid",new Date(),false,18));
 				patientrepo.save(new Patient(null,"Errimy",new Date(),false,19));
+				patientrepo.save(new Patient(null,"Mouad",new Date(),false,18));
+				patientrepo.save(new Patient(null,"Jermoumi",new Date(),false,19));
+				patientrepo.save(new Patient(null,"Rahmani",new Date(),false,18));
+				patientrepo.save(new Patient(null,"Aymane",new Date(),false,19));
+				patientrepo.save(new Patient(null,"Imane",new Date(),false,18));
+				patientrepo.save(new Patient(null,"Sahrane",new Date(),false,19));
 
 				patientrepo.findAll().forEach(p->{
 					System.out.println(p.getNom());
