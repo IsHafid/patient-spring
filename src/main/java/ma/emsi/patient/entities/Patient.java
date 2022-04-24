@@ -17,11 +17,11 @@ import java.util.Date;
 
 public class Patient {
 
-@Id
-@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
-    private Date DateN;
+    private Date daten;
     private boolean malade;
     private int score;
 }
