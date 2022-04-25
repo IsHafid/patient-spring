@@ -37,12 +37,12 @@
                         <td th:text="${p.score}"></td>
 
                         <td sec:authorize="hasRole('ADMIN')">
-                            <a onclick="return confirm('Etes vous sur?')" class="btn btn-danger" th:href="@{delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                            <a onclick="return confirm('Etes vous sur?')" class="btn btn-danger" th:href="@{/admin/delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                                 Supprimer
                             </a>
                         </td>
                         <td sec:authorize="hasRole('ADMIN')">
-                            <a class="btn btn-success" th:href="@{editPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
+                            <a class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id}, keyword=${keyword}, page=${currentPage})}">
                                 Edit
                             </a>
                         </td>
@@ -54,7 +54,7 @@
                     <li th:each="page,status:${pages}">
                         <a th:class="${status.index==currentPage?'btn btn-info m-lg-1': 'btn btn-outline-info m-lg-1'}"
                            th:text="${status.index}"
-                           th:href="@{index(page=${status.index}, keyword=${keyword})}"
+                           th:href="@{/user/index(page=${status.index}, keyword=${keyword})}"
                         ></a>
                     </li>
                 </ul>

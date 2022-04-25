@@ -21,7 +21,7 @@ import java.util.List;
 public class PatientController {
 
     private PatientRepo patientRepo;
-    @GetMapping(path="/index")
+    @GetMapping(path="/user/index")
     public String patient(Model model ,
                           @RequestParam(name = "page",defaultValue="0")int page ,
                           @RequestParam(name = "size",defaultValue="5")int size,
@@ -34,38 +34,38 @@ public class PatientController {
         model.addAttribute("keyword",keyword);
         return "patients";
     }
-    @GetMapping("/delete")
+    @GetMapping("/admin/delete")
     public String delete(Long id, String keyword,int page){
         patientRepo.deleteById(id);
-        return "redirect:/index?page="+page+"&keyword"+keyword;
+        return "redirect:/user/index?page="+page+"&keyword"+keyword;
     }
     @GetMapping("/")
     public String home(){
-        return "redirect:/index";
+        return "home";
     }
 
-    @GetMapping("/patients")
+    @GetMapping("/user/patients")
     @ResponseBody
     public List<Patient> lispatient(){
         return patientRepo.findAll();
     }
 
-    @GetMapping("/formPatients")
+    @GetMapping("/admin/formPatients")
     public String formPatients(Model model){
         model.addAttribute("patient", new Patient());
         return "formPatients";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/admin/save")
     public String save(Model model, @Valid Patient patient, BindingResult bindingResult
             ,@RequestParam(defaultValue = "") String keyword
             ,@RequestParam(defaultValue = "0")  int page){
         if (bindingResult.hasErrors()) return "formPatients";
         patientRepo.save(patient);
-        return "redirect:/index?page="+page+"&keyword="+keyword;
+        return "redirect:/user/index?page="+page+"&keyword="+keyword;
     }
 
-    @GetMapping("/editPatient")
+    @GetMapping("/admin/editPatient")
     public String editPatient(Model model, Long id, String keyword, int page){
         Patient patient= patientRepo.findById(id).get();
         if (patient==null) throw new RuntimeException("Patient Introuvable");
