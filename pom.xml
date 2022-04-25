@@ -58,11 +58,11 @@
 			<version>3.0.4.RELEASE</version>
 		</dependency>
 
-		<!--<dependency>
+		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 
-		</dependency>-->
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.webjars/bootstrap -->
 		<dependency>
 			<groupId>org.webjars</groupId>
