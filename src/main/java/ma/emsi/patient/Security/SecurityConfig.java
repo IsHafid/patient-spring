@@ -8,6 +8,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -27,11 +30,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .withUser("admin").password(encodedPWD).roles("USER","ADMIN");*/
 
-    auth.jdbcAuthentication().dataSource(ds)
+    /*auth.jdbcAuthentication().dataSource(ds)
             .usersByUsernameQuery("select username as principal, password as credentials, active from users where username =?")
             .authoritiesByUsernameQuery("select username as principal , role as role from users_role where username=?")
             .rolePrefix("ROLE_")
-            .passwordEncoder(passwordEncoder);
+            .passwordEncoder(passwordEncoder);*/
+   auth.userDetailsService(new UserDetailsService() {
+       @Override
+       public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+           return null;
+       }
+   });
+
     }
 
     @Override
@@ -40,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/").permitAll();
         http.authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN");
         http.authorizeRequests().antMatchers("/user/**").hasRole("USER");
+        http.authorizeRequests().antMatchers("/webjars/**").permitAll();
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.exceptionHandling().accessDeniedPage("/403");
     }
