@@ -1,11 +1,14 @@
 package ma.emsi.patient;
 
+import ma.emsi.patient.Security.service.SecurityService;
 import ma.emsi.patient.entities.Patient;
 import ma.emsi.patient.repo.PatientRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Date;
 
@@ -19,27 +22,22 @@ public class PatientApplication {
 		}
 
 	@Bean
-	CommandLineRunner commandLineRunner(PatientRepo patientrepo) {
-			return args -> {
-				patientrepo.save(new Patient(null,"Ismail",new Date(),false,12));
-				patientrepo.save(new Patient(null,"Hatim",new Date(),true,15));
-				patientrepo.save(new Patient(null,"Hafid",new Date(),false,18));
-				patientrepo.save(new Patient(null,"Errimy",new Date(),false,19));
-				patientrepo.save(new Patient(null,"Mouad",new Date(),false,18));
-				patientrepo.save(new Patient(null,"Jermoumi",new Date(),false,19));
-				patientrepo.save(new Patient(null,"Rahmani",new Date(),false,18));
-				patientrepo.save(new Patient(null,"Aymane",new Date(),false,19));
-				patientrepo.save(new Patient(null,"Imane",new Date(),false,18));
-				patientrepo.save(new Patient(null,"Sahrane",new Date(),false,19));
-
-				patientrepo.findAll().forEach(p->{
-					System.out.println(p.getNom());
-				});
-
-			};
-
+	PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
 	}
+	//@Bean
+	CommandLineRunner saveUsers(SecurityService SS){
+		return args -> {
+		SS.saveNewUser("ABCD","ABCD","ABCD");
+		SS.saveNewUser("EFG","EFG","EFG");
+		SS.saveNewRole("USER","");
+		SS.saveNewRole("ADMIN","");
+		SS.addRoleToUser("ABCD","ADMIN");
+		SS.addRoleToUser("EFG","USER");
+		SS.addRoleToUser("ABCD","USER");
 
 
+		};
+	}
 
 }
