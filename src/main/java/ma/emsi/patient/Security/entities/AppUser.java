@@ -1,4 +1,4 @@
-package ma.emsi.patient.Security;
+package ma.emsi.patient.Security.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
